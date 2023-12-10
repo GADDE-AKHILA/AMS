@@ -19,15 +19,13 @@ phases:
     commands:
       #- pylint $CODEBUILD_SRC_DIR/*.py
       #- pylint $CODEBUILD_SRC_DIR/*/*.py
-      echo "Testing code pre build"
-      - sonar-scanner -Dsonar.organization=prajeshnikhil -Dsonar.projectKey=BaluThota2012_attandance-test -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=7c139b176d7b3ca5037949a64dd11064f87c8136
+      - sonar-scanner -Dsonar.organization=gadde-akhila -Dsonar.projectKey=GADDE-AKHILA_AMS -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=c898e5529bce55858dc917ccead4e9d4ee4a2a72
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=BaluThota2012_attandance-test > analysis.json
-      - cat analysis.json
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=GADDE-AKHILA_AMS > project_status.json
+      - cat project_status.json
   build:
     commands:
-      echo "testing code build"
-      # - if [[ $(jq -r '.projectStatus.status' analysis.json) = "ERROR" ]] ; then CODEBUILD_BUILD_SUCCEEDING=0; fi
+       - if [[ $(jq -r '.projectStatus.status' analysis.json) = "ERROR" ]] ; then CODEBUILD_BUILD_SUCCEEDING=0; fi
 artifacts:
   files:
     - '**/*'
